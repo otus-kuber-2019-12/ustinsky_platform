@@ -1,12 +1,5 @@
-FROM golang:1.12.9-alpine
-WORKDIR /go/src/
-RUN   apk add git && \
-      mkdir /app && \
-      git clone https://github.com/ustinsky/example-go-httpd.git && \
-      cd example-go-httpd && \
-      go build -o /go/bin/httpd
-WORKDIR /app
-VOLUME /app
+FROM nginx:1.17
+RUN usermod -u 1001 nginx
+RUN mkdir /app
+COPY app.conf /etc/nginx/conf.d/
 EXPOSE 8000
-USER 1001
-CMD /go/bin/httpd
