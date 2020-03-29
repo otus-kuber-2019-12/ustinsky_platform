@@ -1,7 +1,7 @@
 # ustinsky_platform
 ustinsky Platform repository
 
-### Домашняя работа 1 ( [hw1 intro](docs/hw1.md) )
+### Домашняя работа 1 ( [hw1 intro](docs/hw1.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-intro)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 
 ### Разберитесь почему все pod в namespace kube-system восстановились после удаления.
 kubelet запущен как сервис systemd. Он занимается процессом запуска pod-ов.
@@ -39,7 +39,10 @@ kubectl run frontend --image evgeniim/hipster-frontend --restart=Never --dry-run
 ```
 Под не запускался из-за отсутсвия переменных окружений.
 
-### Домашняя работа 2 ( [hw2 controlers](docs/hw2.md) )
+### Домашняя работа 2 ( [hw2 controlers](docs/hw2.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-controllers)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+
+otus-kuber-2019-12/ustinsky_platform/
+
 #### 1. Запустили kind 
 ~~~~~~
 kind create cluster --config kind-config.yaml
@@ -73,7 +76,7 @@ nodes:
 #### 7. Разварачивание на master-нодах
 Чтобы развернуть на мастер нодах нужно настроить параметр ***tolerations***
 
-### Домашняя работа 3 ( [hw3 security](docs/hw3.md) )
+### Домашняя работа 3 ( [hw3 security](docs/hw3.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-security)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 #### task01
 
 1. Создан Service Account bob , дана ему роль admin в рамках всего кластера
