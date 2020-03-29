@@ -38,3 +38,57 @@ kubectl port-forward --address 0.0.0.0 pod/web 8000:8000
 kubectl run frontend --image evgeniim/hipster-frontend --restart=Never --dry-run -o yaml > frontend-pod.yaml
 ```
 Под не запускался из-за отсутсвия переменных окружений.
+
+### Домашняя работа 2 ( [hw2 controlers](docs/hw2.md) )
+#### 1. Запустили kind 
+~~~~~~
+kind create cluster --config kind-config.yaml
+~~~~~~
+
+Содержимое kind-config.yaml
+~~~~~~
+kind: Cluster
+apiVersion: kind.sigs.k8s.io/v1alpha3
+nodes:
+- role: control-plane
+- role: control-plane
+- role: control-plane
+- role: worker
+- role: worker
+- role: worker
+~~~~~~
+
+#### 2. Создали ReplicaSet, Deployment для сервисов frontend, paymentservice
+
+#### 3. **Почему обновление ReplicaSet не повлекло обновление запущенных pod ?**
+***Ответ:*** Replicaset не умеет обновлять некоторые свой свойства - в частности шаблоны контейнеров (template). 
+Шаблоны используются только при создании объекта ReplicaSet. 
+
+#### 4. ***Поигрались*** с обновлениями и откатами новых версии приложений с использованием методов **Blue-Green** и **Reverse Rolling Update**
+
+#### 5. Посмотрели на встроенные механизмы k8s управления готовностью пода к работе - **readinessProbe** и **livenessProbe**
+
+#### 6. Нашли в интернете DaemonSet для ***node-exporter*** и развернули его на всех нодах кластера (мастер и воркер нодах).
+
+#### 7. Разварачивание на master-нодах
+Чтобы развернуть на мастер нодах нужно настроить параметр ***tolerations***
+
+### Домашняя работа 3 ( [hw3 security](docs/hw3.md) )
+#### task01
+
+1. Создан Service Account bob , дана ему роль admin в рамках всего кластера
+2. Создать Service Account dave без доступа к кластеру
+
+#### task02
+
+1. Создан Namespace prometheus
+2. Создан Service Account carol в namespace prometheus
+3. Дан всем Service Account в Namespace prometheus возможность делать get , list , watch в отношении Pods всего кластера
+
+### task03
+
+1. Создан Namespace dev
+2. Создан Service Account jane в Namespace dev
+3. Дана jane роль admin в рамках Namespace dev
+4. Создан Service Account ken в Namespace dev
+5. Дана ken роль view в рамках Namespace dev
