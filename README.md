@@ -97,3 +97,6 @@ nodes:
 5. Дана ken роль view в рамках Namespace dev
 
 ### Домашняя работа 5 ( [hw5 volumes](docs/hw5.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-volumes)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+
+1. Развернули minio
+2. Спрятали скреты в secrets
