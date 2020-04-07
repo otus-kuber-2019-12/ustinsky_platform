@@ -95,3 +95,5 @@ nodes:
 3. Дана jane роль admin в рамках Namespace dev
 4. Создан Service Account ken в Namespace dev
 5. Дана ken роль view в рамках Namespace dev
+
+### Домашняя работа 5 ( [hw5 volumes](docs/hw5.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-volumes)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
