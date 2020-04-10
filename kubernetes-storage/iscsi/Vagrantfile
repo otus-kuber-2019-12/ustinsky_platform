@@ -1,0 +1,41 @@
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+file_to_disk = './tmp/large_disk.vdi'
+$ip = "192.168.33.108"
+
+$script = <<SCRIPT
+apt-get update && apt -y install targetcli-fb
+parted -s /dev/sdc mklabel msdos
+parted -s /dev/sdc unit mib mkpart primary 1 100% set 1 lvm on
+pvcreate /dev/sdc1
+vgcreate vg0 /dev/sdc1
+lvcreate -l 10%FREE -n base vg0
+mkfs.ext4 /dev/vg0/base
+
+echo "Install completed succesfully !!!"
+
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/bionic64"
+  
+
+  config.vm.define "iscsi-storage" do |i|
+    i.vm.hostname = "iscsi-storage"
+    i.vm.network "private_network", ip: $ip
+  end
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "2048"
+    vb.name = "iscsi-storage"
+    vb.cpus = 1
+    unless File.exist?(file_to_disk)
+      vb.customize ['createhd', '--filename', file_to_disk, '--size', 500]
+    end
+    vb.customize ["storageattach", :id, "--storagectl", "SCSI", "--port", 2, "--device", 0, "--type", "hdd", "--medium", file_to_disk]
+  end
+
+  config.vm.provision "shell", inline: $script  
+end
