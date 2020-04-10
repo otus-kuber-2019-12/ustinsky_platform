@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-iscsi-pod
+spec:
+  restartPolicy: Always
+  containers:
+  - name: my-iscsi-pod
+    image: nginx
+    volumeMounts:
+      - name: iscsi-test
+        mountPath: /mnt
+  volumes:
+  - name: iscsi-test
+    iscsi:
+      targetPortal: 192.168.33.108:3260
+      iqn: iqn.2003-01.org.linux-iscsi.iscsi-storage.x8664:sn.b40f69d20105
+      fsType: ext4
+      lun: 0
+      readOnly: false
+
