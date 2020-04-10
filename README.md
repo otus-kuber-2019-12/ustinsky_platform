@@ -102,28 +102,28 @@ nodes:
 2. Спрятали скреты в secrets
 
 
-# Домашняя работа 14 ( [hw14 storage](docs/hw14.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-storage)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+### Домашняя работа 14 ( [hw14 storage](docs/hw14.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-storage)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 
-## 1. Запуск
+#### 1. Запуск
 
-### 1.1 Устанавливаем Kubernetes( вариант k1s )
+##### 1.1 Устанавливаем Kubernetes( вариант k1s )
   - `git clone https://github.com/maniaque/k1s.git`
   - `cd k1s/vagrant/single/`
   - `vagrant up`
   - `vagrant ssh -c 'cat /home/vagrant/.kube/config' > ~/.kube/config`
 
-### 1.2 Установить CSI Host Path Driver:
+##### 1.2 Установить CSI Host Path Driver:
   - `git clone https://github.com/kubernetes-csi/csi-driver-host-path.git`
   - `bash deploy_snap`
   - `cd csi-driver-host-path/`
   - `git checkout 99036d47eab`
   - `deploy/kubernetes-1.17/deploy.sh`
 
-### 1.3 Запускаем
+##### 1.3 Запускаем
   - `kubectl apply -f hw/01-sc.yaml`
   - `kubectl apply -f hw/02-pvc.yaml`
   - `kubectl apply -f hw/03-pod.yaml`
 
 
-## 2. ISCSI
+#### 2. ISCSI
 Установили и поигрались с ISCSI
