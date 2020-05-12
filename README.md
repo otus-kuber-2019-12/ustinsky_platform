@@ -1,7 +1,7 @@
 # ustinsky_platform
 ustinsky Platform repository
 
-### Домашняя работа 1 ( [hw1 intro](docs/hw1.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-intro)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+## Домашняя работа 1 ( [hw1 intro](docs/hw1.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-intro)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 
 ### Разберитесь почему все pod в namespace kube-system восстановились после удаления.
 kubelet запущен как сервис systemd. Он занимается процессом запуска pod-ов.
@@ -39,7 +39,7 @@ kubectl run frontend --image evgeniim/hipster-frontend --restart=Never --dry-run
 ```
 Под не запускался из-за отсутсвия переменных окружений.
 
-### Домашняя работа 2 ( [hw2 controlers](docs/hw2.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-controllers)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+## Домашняя работа 2 ( [hw2 controlers](docs/hw2.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-controllers)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 
 otus-kuber-2019-12/ustinsky_platform/
 
@@ -76,7 +76,7 @@ nodes:
 #### 7. Разварачивание на master-нодах
 Чтобы развернуть на мастер нодах нужно настроить параметр ***tolerations***
 
-### Домашняя работа 3 ( [hw3 security](docs/hw3.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-security)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+## Домашняя работа 3 ( [hw3 security](docs/hw3.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-security)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 #### task01
 
 1. Создан Service Account bob , дана ему роль admin в рамках всего кластера
@@ -96,34 +96,79 @@ nodes:
 4. Создан Service Account ken в Namespace dev
 5. Дана ken роль view в рамках Namespace dev
 
-### Домашняя работа 5 ( [hw5 volumes](docs/hw5.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-volumes)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+## Домашняя работа 4 ( [hw4 networks](docs/hw4.md) )
+#### 1. Работа с тестовым веб-приложением
+ - 1. Добавлен проверок Pod (ReadinessProbe, LivenessProbe)
+ - 2. Создан объект Deployment
+ - 3. Добавлен сервис в кластер (ClusterIP)
+ - 4. Включен режима балансировки IPVS
+
+#### 2. Доступ к приложению извне кластера
+ - 1. Установлен MetaILB в Layer2 режиме
+ - 2. Добавлен сервис LoadBalancer
+ - 3. Установлен ingress-контроллер и прокси ingress-nginx
+ - 4. Созданы правила Ingress
+
+#### 3 Для запуска:
+```
+kubectl apply -f web-deploy.yaml
+
+kubectl apply -f web-svc-cip.yaml
+
+# меняем настройки minikube
+kubectl --namespace kube-system edit configmap/kube-proxy (ищем KubeProxyConfig и меняем mode: "" => mode: "ipvs")
+kubectl --namespace kube-system delete pod --selector='k8s-app=kube-proxy'
+
+kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.0/manifests/metallb.yaml
+
+kubectl apply -f metallb-config.yaml
+
+kubectl apply -f web-svc-lb.yaml
+
+# получаем IP
+minikube ip 
+
+ip route add 172.17.255.0/24 via <IP>
+
+kubectl apply -f coredns-svc-lb.yaml
+
+kubeclt apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.27.1/deploy/static/mandatory.yaml
+
+kubectl apply -f nginx-lb.yaml
+
+kubectl apply -f web-svc-headless.yaml
+
+kubectl apply -f web-ingress.yaml
+```
+
+## Домашняя работа 5 ( [hw5 volumes](docs/hw5.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-volumes)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 
 1. Развернули minio
 2. Спрятали скреты в secrets
 
 
-# Домашняя работа 14 ( [hw14 storage](docs/hw14.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-storage)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+## Домашняя работа 14 ( [hw14 storage](docs/hw14.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-storage)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 
-## 1. Запуск
+### 1. Запуск
 
-### 1.1 Устанавливаем Kubernetes( вариант k1s )
+#### 1.1 Устанавливаем Kubernetes( вариант k1s )
   - `git clone https://github.com/maniaque/k1s.git`
   - `cd k1s/vagrant/single/`
   - `vagrant up`
   - `vagrant ssh -c 'cat /home/vagrant/.kube/config' > ~/.kube/config`
 
-### 1.2 Установить CSI Host Path Driver:
+#### 1.2 Установить CSI Host Path Driver:
   - `git clone https://github.com/kubernetes-csi/csi-driver-host-path.git`
   - `bash deploy_snap`
   - `cd csi-driver-host-path/`
   - `git checkout 99036d47eab`
   - `deploy/kubernetes-1.17/deploy.sh`
 
-### 1.3 Запускаем
+#### 1.3 Запускаем
   - `kubectl apply -f hw/01-sc.yaml`
   - `kubectl apply -f hw/02-pvc.yaml`
   - `kubectl apply -f hw/03-pod.yaml`
 
 
-## 2. ISCSI
+### 2. ISCSI
 Установили и поигрались с ISCSI
