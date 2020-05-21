@@ -144,11 +144,17 @@ kubectl apply -f web-ingress.yaml
 ## Домашняя работа 5 ( [hw5 volumes](docs/hw5.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-volumes)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 
 1. Развернули minio
-2. Спрятали скреты в secrets
+2. Спрятали секреты в secrets
+
+## Домашняя работа 8 ( [hw8 monitoring](docs/hw8.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-monitoring)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+
+В работе выполнено:
+  * Установили prometheus с помощью helm3
+  * Создали тестовый сервер nginx
+  * Зашли на Grafana и Prometheus и увидели метрики
 
 
-
-## Домашняя работа 14 ( [hw14 storage](docs/hw14.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-storage)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+## Домашняя работа 13 ( [hw13 storage](docs/hw13.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-storage)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 
 ### 1. Запуск
 
@@ -178,3 +184,15 @@ kubectl apply -f web-ingress.yaml
 ### 2. ISCSI
 
 Установили и поигрались с ISCSI
+
+## Домашняя работа 14 ( [hw14 kubernetes-production-clusters](docs/hw14.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-production-clusters)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+
+В работе выполнено:
+  * Установили кластер k8s с помощью kubeadm
+  * Обновили кластер до версии 18
+  * Установили кластер с помошью kubespray
+
+Файлы в папке kubernetes-production-clusters:
+  * deployment.yml  - развертывание nginx
+  * inventory.ini   - playbook для kuberspray с 1 мастер нодой и 3 воркер нодами
+  * inventory2.ini  - playbook для kuberspray с 3 мастер нодами и 2 воркер нодами

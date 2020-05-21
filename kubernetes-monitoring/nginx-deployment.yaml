@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    deployment: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        volumeMounts:
+          - mountPath: /etc/nginx/nginx.conf
+            subPath: nginx.conf 
+            readOnly: true
+            name: nginx-conf-vol
+          - mountPath: /var/www/html/index.html
+            subPath: index.html 
+            readOnly: true
+            name: index-html
+        readinessProbe:
+            httpGet:
+              path: /basic_status
+              port: 8000
+        livenessProbe:
+            tcpSocket:
+              port: 8000
+        ports:
+          - containerPort: 8000
+            name: port-http
+      - name: nginx-exporter
+        image: nginx/nginx-prometheus-exporter:0.5.0
+        args: ['-nginx.scrape-uri', 'http://localhost:8000/basic_status']
+        ports:
+          - containerPort: 9113
+            name: port-metrics
+      volumes:
+      - name: nginx-conf-vol
+        configMap:
+          name: nginx-conf
+      - name: index-html
+        configMap:
+          name: index-html
