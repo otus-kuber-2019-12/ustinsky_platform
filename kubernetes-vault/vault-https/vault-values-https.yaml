@@ -1,0 +1,45 @@
+global:
+  tlsDisable: false
+
+server:
+  standalone:
+    enabled: false
+  extraEnvironmentVars:
+      VAULT_ADDR: https://127.0.0.1:8200
+      VAULT_API_ADDR: https://$(POD_IP):8200
+      VAULT_CACERT: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+
+  extraVolumes:
+    - type: secret
+      name: vault-certs # должен совпадать с $SECRET_NAME
+      path: null # /vault/userconfig
+
+
+  ha:
+      enabled: true
+      replicas: 1
+      config: |
+        disable_mlock = true
+        ui = true
+        cluster_addr = "https://POD_IP:8201"
+
+        listener "tcp" {
+          tls_disable = 0
+          # tls_disable = 1
+          address = "[::]:8200"
+          cluster_address = "[::]:8201"
+          tls_cert_file = "/vault/userconfig/vault-certs/tls.crt"
+          tls_key_file  = "/vault/userconfig/vault-certs/tls.key"
+          # tls_client_ca_file = "/vault/userconfig/vault-server-tls/vault.ca"
+        }
+        storage "consul" {
+          path = "vault"
+          address = "HOST_IP:8500"
+        }
+        # storage "file" {
+        #   path = "/vault/data"
+        # }
+
+  ui:
+    enabled: true
+    serviceType: "ClusterIP"

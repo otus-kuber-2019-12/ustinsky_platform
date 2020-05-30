@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-vault
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-vault
+  template:
+    metadata:
+      labels:
+        app: nginx-vault
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/agent-inject-secret-server.cert: "pki_int/issue/example-dot-ru"
+        vault.hashicorp.com/agent-inject-template-server.cert: |
+          {{- with secret "pki_int/issue/example-dot-ru" "common_name=nginx.example.ru" "ttl=2m" -}}
+          {{ .Data.certificate }}
+          {{- end }}
+        vault.hashicorp.com/agent-inject-secret-server.key: "pki_int/issue/example-dot-ru"
+        vault.hashicorp.com/agent-inject-template-server.key: |
+          {{- with secret "pki_int/issue/example-dot-ru" "common_name=nginx.example.ru" "ttl=2m" -}}
+          {{ .Data.private_key }}
+          {{- end }}
+        vault.hashicorp.com/agent-inject-command-server.key: "/usr/sbin/nginx -s reload"
+        vault.hashicorp.com/agent-run-as-user: "0"
+        vault.hashicorp.com/agent-run-as-group: "0"
+        vault.hashicorp.com/ca-cert: "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+        vault.hashicorp.com/role: "nginx-role"
+        vault.hashicorp.com/tls-skip-verify: "true"
+        vault.hashicorp.com/service: "https://vault:8200"
+    spec:
+      serviceAccountName: vault-auth
+      containers:
+        - name: nginx-vault
+          image: nginx
+          volumeMounts:
+            - mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf 
+              name: nginx-conf-vol
+            - mountPath: /var/www/html/index.html
+              subPath: index.html 
+              name: index-html
+          ports:
+            - containerPort: 443
+              name: https
+      volumes:
+        - name: nginx-conf-vol
+          configMap:
+            name: nginx-conf
+        - name: index-html
+          configMap:
+            name: index-html
