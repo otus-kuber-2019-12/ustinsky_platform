@@ -146,6 +146,12 @@ kubectl apply -f web-ingress.yaml
 1. Развернули minio
 2. Спрятали секреты в secrets
 
+## Домашняя работа 8 ( [hw8 monitoring](docs/hw8.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-monitoring)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+
+В работе выполнено:
+  * Установили prometheus с помощью helm3
+  * Создали тестовый сервер nginx
+  * Зашли на Grafana и Prometheus и увидели метрики
 
 
 ## Домашняя работа 13 ( [hw13 storage](docs/hw13.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-storage)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
