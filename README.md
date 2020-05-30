@@ -146,7 +146,12 @@ kubectl apply -f web-ingress.yaml
 1. Развернули minio
 2. Спрятали секреты в secrets
 
-
+## Домашняя работа 10 ( [hw10 Hashicorp Vault](docs/hw10.md) ) 
+В ходе работы:
+1. Установили Vault
+2. Сгенерировали сертификаты 
+3. Настроили работу vault по HTTPS
+4. Настроили динамическое обновление сертификатов
 
 ## Домашняя работа 13 ( [hw13 storage](docs/hw13.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-storage)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 
