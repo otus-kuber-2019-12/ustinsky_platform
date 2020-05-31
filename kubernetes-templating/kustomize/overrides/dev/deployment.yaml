@@ -1,0 +1,12 @@
+# productcatalogservice
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productcatalogservice
+spec:
+  selector:
+    matchLabels:
+      app: productcatalogservice
+  replicas: 1
+
