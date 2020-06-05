@@ -160,6 +160,12 @@ kubectl apply -f web-ingress.yaml
 3. Настроили работу vault по HTTPS
 4. Настроили динамическое обновление сертификатов
 
+## Домашняя работа 12 ( [hw12 debug](docs/hw12.md) ) 
+  В работе делали:
+- Поигрались с strace
+- Установили кластер с calico
+- Поигрались с calico, netperf, iptables-tailer.
+
 ## Домашняя работа 13 ( [hw13 storage](docs/hw13.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-storage)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 
 ### 1. Запуск
