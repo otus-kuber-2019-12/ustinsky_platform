@@ -146,7 +146,11 @@ kubectl apply -f web-ingress.yaml
 1. Развернули minio
 2. Спрятали скреты в secrets
 
-
+## Домашняя работа 12 ( [hw12 debug](docs/hw12.md) ) 
+  В работе делали:
+- Поигрались с strace
+- Установили кластер с calico
+- Поигрались с calico, netperf, iptables-tailer.   
 
 ## Домашняя работа 14 ( [hw14 storage](docs/hw14.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-storage)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 
