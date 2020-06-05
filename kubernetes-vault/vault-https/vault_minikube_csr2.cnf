@@ -1,0 +1,24 @@
+[req]
+req_extensions = v3_req
+distinguished_name = req_distinguished_name
+[req_distinguished_name]
+[ dn ]
+commonName = localhost
+stateOrProvinceName = Moscow
+countryName = RU
+emailAddress = no@na.me
+organizationName = NoORG
+organizationalUnitName = IT
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = vault
+DNS.2 = localhost
+DNS.3 = vault-server-tls
+DNS.4 = vault-server-tls.default
+DNS.5 = vault-server-tls.default.svc
+DNS.6 = vault-server-tls.default.svc.cluster.local
+IP.1 = 127.0.0.1
