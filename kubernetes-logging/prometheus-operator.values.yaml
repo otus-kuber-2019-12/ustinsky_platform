@@ -1,0 +1,57 @@
+defaultRules:
+  alertmanagerSpec:
+    nodeSelector:
+      cloud.google.com/gke-nodepool: infra-pool
+    tolerations: 
+      - key: node-role
+        operator: Equal
+        value: infra
+        effect: NoSchedule
+
+alertmanager:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - alertmanager.34.91.178.241.xip.io
+    paths:
+      - /
+
+grafana:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - grafana.34.91.178.241.xip.io
+    paths:
+      - /
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: http://loki:3100
+      jsonData:
+        maxLines: 1000
+
+prometheus:
+  prometheusSpec:
+    tolerations:
+      - key: node-role
+        operator: Equal
+        value: infra
+        effect: NoSchedule
+    nodeSelector:
+      cloud.google.com/gke-nodepool: infra-pool
+    serviceMonitorSelectorNilUsesHelmValues: false
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - prometheus.34.91.178.241.xip.io
+    paths:
+      - /
+  
+

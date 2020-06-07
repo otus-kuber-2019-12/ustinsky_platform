@@ -161,6 +161,13 @@ kubectl apply -f web-ingress.yaml
   * Создали тестовый сервер nginx
   * Зашли на Grafana и Prometheus и увидели метрики
 
+## Домашняя работа 9 ( [hw9 logging](docs/hw9.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-logging)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+В работе выполнено:
+  * Установили EFK
+  * Посмотрели на отработку дашборда при отказе ноды с ElasticSearch
+  * Создали дашборд в Kibana
+  * Создали дашборд в Loki
+
 ## Домашняя работа 10 ( [hw10 Hashicorp Vault](docs/hw10.md) ) 
 В ходе работы:
 1. Установили Vault
