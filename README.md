@@ -147,11 +147,23 @@ kubectl apply -f web-ingress.yaml
 2. Спрятали секреты в secrets
 
 
+## Домашняя работа 6 ( [hw6 templating](docs/hw6.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-templating)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+В ходе работы сделано:
+1. Установлен helm 3
+2. Установлен Cert-manager
+3. Установлен Harbor
+4. Рассмотрен процесс создания своего chart-a
+5. Рассмотрен helm secret
+6. Рассмотрен kubecfg
+7. Рассмотрен kustomize
+
+
 ## Домашняя работа 7 ( [hw7 operators](docs/hw7.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-operators)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
 В работе выполнено:
   * Написали оператор
   * Поправили оператор из методички - чтобы он стабильно удалял и восстанавливал (добавили удаление recovery job при удалении instance)
   * Посмотрели kopf и добавили код для обновления пароля и записи event и status в describe
+
 
 
 ## Домашняя работа 8 ( [hw8 monitoring](docs/hw8.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-monitoring)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
