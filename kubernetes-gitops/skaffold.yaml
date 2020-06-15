@@ -1,0 +1,103 @@
+apiVersion: skaffold/v2beta1
+kind: Config
+build:
+  artifacts:
+  - image: avtandilko/emailservice
+    context: src/emailservice
+  - image: avtandilko/productcatalogservice
+    context: src/productcatalogservice
+  - image: avtandilko/recommendationservice
+    context: src/recommendationservice
+  - image: avtandilko/shippingservice
+    context: src/shippingservice
+  - image: avtandilko/checkoutservice
+    context: src/checkoutservice
+  - image: avtandilko/paymentservice
+    context: src/paymentservice
+  - image: avtandilko/currencyservice
+    context: src/currencyservice
+  - image: avtandilko/cartservice
+    context: src/cartservice
+  - image: avtandilko/frontend
+    context: src/frontend
+  - image: avtandilko/loadgenerator
+    context: src/loadgenerator
+  - image: avtandilko/adservice
+    context: src/adservice
+  tagPolicy:
+    dateTime: {}
+deploy:
+  helm:
+    flags:
+      upgrade:
+        - "--install"  
+    releases:
+    - name: adservice
+      chartPath: deploy/charts/adservice
+      values:
+        image: avtandilko/adservice
+      imageStrategy:
+          helm: {}
+    - name: cartservice
+      chartPath: deploy/charts/cartservice
+      values:
+        image: avtandilko/cartservice
+      imageStrategy:
+          helm: {}
+    - name: checkoutservice
+      chartPath: deploy/charts/checkoutservice
+      values:
+        image: avtandilko/checkoutservice
+      imageStrategy:
+          helm: {}
+    - name: currencyservice
+      chartPath: deploy/charts/currencyservice
+      values:
+        image: avtandilko/currencyservice
+      imageStrategy:
+          helm: {}
+    - name: emailservice
+      chartPath: deploy/charts/emailservice
+      values:
+        image: avtandilko/emailservice
+      imageStrategy:
+          helm: {}
+    - name: frontend
+      chartPath: deploy/charts/frontend
+      values:
+        image: avtandilko/frontend
+      valuesFiles: 
+      - frontend-feature.yaml
+      imageStrategy:
+          helm: {}
+    - name: paymentservice
+      chartPath: deploy/charts/paymentservice
+      values:
+        image: avtandilko/paymentservice
+      imageStrategy:
+          helm: {}
+    - name: productcatalogservice
+      chartPath: deploy/charts/productcatalogservice
+      values:
+        image: avtandilko/productcatalogservice
+      imageStrategy:
+          helm: {}
+    - name: recommendationservice
+      chartPath: deploy/charts/recommendationservice
+      values:
+        image: avtandilko/recommendationservice
+      imageStrategy:
+          helm: {}
+    - name: shippingservice
+      chartPath: deploy/charts/shippingservice
+      values:
+        image: avtandilko/shippingservice
+      imageStrategy:
+          helm: {}
+    - name: loadgenerator      
+      chartPath: deploy/charts/loadgenerator
+      values:
+        image: avtandilko/loadgenerator
+      imageStrategy:
+          helm: {}
+

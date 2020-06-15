@@ -1,7 +1,7 @@
 # ustinsky_platform
 ustinsky Platform repository
 
-## Домашняя работа 1 ( [hw1 intro](docs/hw1.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-intro)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+## Домашняя работа 1 ( [hw1 intro](docs/hw1.md) ) 
 
 ### Разберитесь почему все pod в namespace kube-system восстановились после удаления.
 kubelet запущен как сервис systemd. Он занимается процессом запуска pod-ов.
@@ -147,7 +147,7 @@ kubectl apply -f web-ingress.yaml
 2. Спрятали секреты в secrets
 
 
-## Домашняя работа 6 ( [hw6 templating](docs/hw6.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-templating)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+## Домашняя работа 6 ( [hw6 templating](docs/hw6.md) ) 
 В ходе работы сделано:
 1. Установлен helm 3
 2. Установлен Cert-manager
@@ -166,26 +166,34 @@ kubectl apply -f web-ingress.yaml
 
 
 
-## Домашняя работа 8 ( [hw8 monitoring](docs/hw8.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-monitoring)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+## Домашняя работа 8 ( [hw8 monitoring](docs/hw8.md) ) 
 
 В работе выполнено:
   * Установили prometheus с помощью helm3
   * Создали тестовый сервер nginx
   * Зашли на Grafana и Prometheus и увидели метрики
 
-## Домашняя работа 9 ( [hw9 logging](docs/hw9.md) ) [![Build Status](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform.svg?branch=kubernetes-logging)](https://travis-ci.com/otus-kuber-2019-12/ustinsky_platform/)
+## Домашняя работа 9 ( [hw9 logging](docs/hw9.md) ) 
 В работе выполнено:
   * Установили EFK
   * Посмотрели на отработку дашборда при отказе ноды с ElasticSearch
   * Создали дашборд в Kibana
   * Создали дашборд в Loki
 
-## Домашняя работа 10 ( [hw10 Hashicorp Vault](docs/hw10.md) ) 
+## Домашняя работа 10 ( [hw10 vault](docs/hw10.md) ) 
 В ходе работы:
 1. Установили Vault
 2. Сгенерировали сертификаты 
 3. Настроили работу vault по HTTPS
 4. Настроили динамическое обновление сертификатов
+
+## Домашняя работа 11 ( [hw11 gitops](docs/hw11.md) ) 
+В ходе работы:
+1. Установили Flux, Flagger
+2. Посмотрели обновление манифестов при разверывании нового образа docker 
+3. Посмотрели на канареечное развертывание с помощью Flagger
+
+Ссылка на репозиторий: https://gitlab.com/ustinsky/microservices-demo-1.git
 
 ## Домашняя работа 12 ( [hw12 debug](docs/hw12.md) ) 
   В работе делали:

@@ -1,0 +1,49 @@
+{%- for service in services -%} 
+
+static-analysis:{{ service }}:
+  extends: .static-analysis:common
+  variables: 
+    SERVICE: {{ service }}
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/{{ service }}/**/*
+
+build:{{ service }}:
+  extends: .build:common
+  variables: 
+    SERVICE: {{ service }}
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/{{ service }}/**/*
+  needs: ["static-analysis:{{ service }}"]
+
+scan:{{ service }}:
+  extends: .scan:common
+  variables: 
+    SERVICE: {{ service }}
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/{{ service }}/**/*
+  needs: ["build:{{ service }}"]
+
+push:{{ service }}:
+  extends: .push:common
+  variables: 
+    SERVICE: {{ service }}
+  only:
+    refs: 
+      - master
+    changes:
+      - src/{{ service }}/**/*
+  needs: ["scan:{{ service }}"]
+
+{% endfor %}

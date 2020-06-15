@@ -1,0 +1,17 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: grafana-load-dashboards
+  namespace: microservices-demo
+  annotations:
+    fluxcd.io/ignore: "false"
+spec:
+  releaseName: grafana-load-dashboards
+  helmVersion: v3
+  chart:
+    git: git@gitlab.com:ustinsky/microservices-demo-1.git
+    ref: master
+    path: deploy/charts/grafana-load-dashboards
+
+

@@ -1,0 +1,79 @@
+stages:
+  - static-analysis
+  - build
+  - scan
+  - push
+
+.common:
+  tags:
+    - docker
+  except: 
+    refs:
+      - flux-sync
+
+.docker-template:
+  extends: .common
+  image:
+    name: docker:19.03.1
+    entrypoint: [""]
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+  after_script:
+    - docker logout $REGISTRY
+
+.build:common:
+  extends: .docker-template
+  stage: build
+  variables:
+    SERVICE: SERVICE
+  # https://gitlab.com/gitlab-org/gitlab/issues/8177
+  # rules:
+  #  - changes:
+  #    - src/${SERVICE}/**/*
+  script:
+    - cd src/$SERVICE
+    - docker build . -f Dockerfile -t $CI_REGISTRY_USER/$SERVICE:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHA -t $CI_REGISTRY_USER/$SERVICE:latest
+
+.static-analysis:common:
+  extends: .common
+  stage: static-analysis
+  image:
+    name: sonarsource/sonar-scanner-cli:4.2
+    entrypoint: [""]
+  script:
+    - sonar-scanner
+      -D"sonar.host.url=http://sonarqube.kubernetes-platform-demo.express42.io"
+      -D"sonar.scm.disabled=true"
+      -D"sonar.projectKey=${SERVICE}"
+      -D"sonar.login=${SONARQUBE_TOKEN}"
+      -D"sonar.projectVersion=${CI_COMMIT_SHA}"
+      -D"sonar.projectBaseDir=src/${SERVICE}/"
+
+.scan:common:
+  extends: .common
+  stage: scan
+  image: docker:19.03.1
+  allow_failure: true
+  before_script:
+    - apk add --no-cache curl
+    - export VERSION=$(curl --silent "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+    - echo $VERSION
+    - wget https://github.com/aquasecurity/trivy/releases/download/v${VERSION}/trivy_${VERSION}_Linux-64bit.tar.gz
+    - tar zxvf trivy_${VERSION}_Linux-64bit.tar.gz
+  script:
+    - ./trivy --exit-code 0 --severity CRITICAL --no-progress $CI_REGISTRY_USER/$SERVICE:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHA
+  cache:
+    paths:
+      - $CI_PROJECT_DIR/.trivycache/
+
+.push:common:
+  extends: .docker-template
+  stage: push
+  variables: 
+    SERVICE: SERVICE
+  script:
+    - docker push $CI_REGISTRY_USER/$SERVICE:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_USER/$SERVICE:latest
+
+include:
+  - 'pipeline-gen/generated.yaml'

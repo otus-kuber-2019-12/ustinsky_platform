@@ -1,0 +1,506 @@
+static-analysis:adservice:
+  extends: .static-analysis:common
+  variables: 
+    SERVICE: adservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/adservice/**/*
+
+build:adservice:
+  extends: .build:common
+  variables: 
+    SERVICE: adservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/adservice/**/*
+  needs: ["static-analysis:adservice"]
+
+scan:adservice:
+  extends: .scan:common
+  variables: 
+    SERVICE: adservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/adservice/**/*
+  needs: ["build:adservice"]
+
+push:adservice:
+  extends: .push:common
+  variables: 
+    SERVICE: adservice
+  only:
+    refs: 
+      - master
+    changes:
+      - src/adservice/**/*
+  needs: ["scan:adservice"]
+
+static-analysis:checkoutservice:
+  extends: .static-analysis:common
+  variables: 
+    SERVICE: checkoutservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/checkoutservice/**/*
+
+build:checkoutservice:
+  extends: .build:common
+  variables: 
+    SERVICE: checkoutservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/checkoutservice/**/*
+  needs: ["static-analysis:checkoutservice"]
+
+scan:checkoutservice:
+  extends: .scan:common
+  variables: 
+    SERVICE: checkoutservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/checkoutservice/**/*
+  needs: ["build:checkoutservice"]
+
+push:checkoutservice:
+  extends: .push:common
+  variables: 
+    SERVICE: checkoutservice
+  only:
+    refs: 
+      - master
+    changes:
+      - src/checkoutservice/**/*
+  needs: ["scan:checkoutservice"]
+
+static-analysis:emailservice:
+  extends: .static-analysis:common
+  variables: 
+    SERVICE: emailservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/emailservice/**/*
+
+build:emailservice:
+  extends: .build:common
+  variables: 
+    SERVICE: emailservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/emailservice/**/*
+  needs: ["static-analysis:emailservice"]
+
+scan:emailservice:
+  extends: .scan:common
+  variables: 
+    SERVICE: emailservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/emailservice/**/*
+  needs: ["build:emailservice"]
+
+push:emailservice:
+  extends: .push:common
+  variables: 
+    SERVICE: emailservice
+  only:
+    refs: 
+      - master
+    changes:
+      - src/emailservice/**/*
+  needs: ["scan:emailservice"]
+
+static-analysis:loadgenerator:
+  extends: .static-analysis:common
+  variables: 
+    SERVICE: loadgenerator
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/loadgenerator/**/*
+
+build:loadgenerator:
+  extends: .build:common
+  variables: 
+    SERVICE: loadgenerator
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/loadgenerator/**/*
+  needs: ["static-analysis:loadgenerator"]
+
+scan:loadgenerator:
+  extends: .scan:common
+  variables: 
+    SERVICE: loadgenerator
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/loadgenerator/**/*
+  needs: ["build:loadgenerator"]
+
+push:loadgenerator:
+  extends: .push:common
+  variables: 
+    SERVICE: loadgenerator
+  only:
+    refs: 
+      - master
+    changes:
+      - src/loadgenerator/**/*
+  needs: ["scan:loadgenerator"]
+
+static-analysis:productcatalogservice:
+  extends: .static-analysis:common
+  variables: 
+    SERVICE: productcatalogservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/productcatalogservice/**/*
+
+build:productcatalogservice:
+  extends: .build:common
+  variables: 
+    SERVICE: productcatalogservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/productcatalogservice/**/*
+  needs: ["static-analysis:productcatalogservice"]
+
+scan:productcatalogservice:
+  extends: .scan:common
+  variables: 
+    SERVICE: productcatalogservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/productcatalogservice/**/*
+  needs: ["build:productcatalogservice"]
+
+push:productcatalogservice:
+  extends: .push:common
+  variables: 
+    SERVICE: productcatalogservice
+  only:
+    refs: 
+      - master
+    changes:
+      - src/productcatalogservice/**/*
+  needs: ["scan:productcatalogservice"]
+
+static-analysis:shippingservice:
+  extends: .static-analysis:common
+  variables: 
+    SERVICE: shippingservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/shippingservice/**/*
+
+build:shippingservice:
+  extends: .build:common
+  variables: 
+    SERVICE: shippingservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/shippingservice/**/*
+  needs: ["static-analysis:shippingservice"]
+
+scan:shippingservice:
+  extends: .scan:common
+  variables: 
+    SERVICE: shippingservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/shippingservice/**/*
+  needs: ["build:shippingservice"]
+
+push:shippingservice:
+  extends: .push:common
+  variables: 
+    SERVICE: shippingservice
+  only:
+    refs: 
+      - master
+    changes:
+      - src/shippingservice/**/*
+  needs: ["scan:shippingservice"]
+
+static-analysis:cartservice:
+  extends: .static-analysis:common
+  variables: 
+    SERVICE: cartservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/cartservice/**/*
+
+build:cartservice:
+  extends: .build:common
+  variables: 
+    SERVICE: cartservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/cartservice/**/*
+  needs: ["static-analysis:cartservice"]
+
+scan:cartservice:
+  extends: .scan:common
+  variables: 
+    SERVICE: cartservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/cartservice/**/*
+  needs: ["build:cartservice"]
+
+push:cartservice:
+  extends: .push:common
+  variables: 
+    SERVICE: cartservice
+  only:
+    refs: 
+      - master
+    changes:
+      - src/cartservice/**/*
+  needs: ["scan:cartservice"]
+
+static-analysis:currencyservice:
+  extends: .static-analysis:common
+  variables: 
+    SERVICE: currencyservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/currencyservice/**/*
+
+build:currencyservice:
+  extends: .build:common
+  variables: 
+    SERVICE: currencyservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/currencyservice/**/*
+  needs: ["static-analysis:currencyservice"]
+
+scan:currencyservice:
+  extends: .scan:common
+  variables: 
+    SERVICE: currencyservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/currencyservice/**/*
+  needs: ["build:currencyservice"]
+
+push:currencyservice:
+  extends: .push:common
+  variables: 
+    SERVICE: currencyservice
+  only:
+    refs: 
+      - master
+    changes:
+      - src/currencyservice/**/*
+  needs: ["scan:currencyservice"]
+
+static-analysis:frontend:
+  extends: .static-analysis:common
+  variables: 
+    SERVICE: frontend
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/frontend/**/*
+
+build:frontend:
+  extends: .build:common
+  variables: 
+    SERVICE: frontend
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/frontend/**/*
+  needs: ["static-analysis:frontend"]
+
+scan:frontend:
+  extends: .scan:common
+  variables: 
+    SERVICE: frontend
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/frontend/**/*
+  needs: ["build:frontend"]
+
+push:frontend:
+  extends: .push:common
+  variables: 
+    SERVICE: frontend
+  only:
+    refs: 
+      - master
+    changes:
+      - src/frontend/**/*
+  needs: ["scan:frontend"]
+
+static-analysis:paymentservice:
+  extends: .static-analysis:common
+  variables: 
+    SERVICE: paymentservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/paymentservice/**/*
+
+build:paymentservice:
+  extends: .build:common
+  variables: 
+    SERVICE: paymentservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/paymentservice/**/*
+  needs: ["static-analysis:paymentservice"]
+
+scan:paymentservice:
+  extends: .scan:common
+  variables: 
+    SERVICE: paymentservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/paymentservice/**/*
+  needs: ["build:paymentservice"]
+
+push:paymentservice:
+  extends: .push:common
+  variables: 
+    SERVICE: paymentservice
+  only:
+    refs: 
+      - master
+    changes:
+      - src/paymentservice/**/*
+  needs: ["scan:paymentservice"]
+
+static-analysis:recommendationservice:
+  extends: .static-analysis:common
+  variables: 
+    SERVICE: recommendationservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/recommendationservice/**/*
+
+build:recommendationservice:
+  extends: .build:common
+  variables: 
+    SERVICE: recommendationservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/recommendationservice/**/*
+  needs: ["static-analysis:recommendationservice"]
+
+scan:recommendationservice:
+  extends: .scan:common
+  variables: 
+    SERVICE: recommendationservice
+  only:
+    refs:
+      - /^feature.*/
+      - master
+    changes:
+      - src/recommendationservice/**/*
+  needs: ["build:recommendationservice"]
+
+push:recommendationservice:
+  extends: .push:common
+  variables: 
+    SERVICE: recommendationservice
+  only:
+    refs: 
+      - master
+    changes:
+      - src/recommendationservice/**/*
+  needs: ["scan:recommendationservice"]
+

@@ -1,0 +1,5 @@
+image:
+  repository: ustinsky/frontend
+  tag: latest
+ingress:
+  host: "*"

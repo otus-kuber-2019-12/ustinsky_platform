@@ -1,0 +1,12 @@
+services:
+  - adservice
+  - checkoutservice
+  - emailservice
+  - loadgenerator
+  - productcatalogservice
+  - shippingservice
+  - cartservice
+  - currencyservice
+  - frontend
+  - paymentservice
+  - recommendationservice
