@@ -1,0 +1,5 @@
+image:
+  repository: ustinsky/loadgenerator
+  tag: latest
+ingress:
+  host: 34.90.83.224
